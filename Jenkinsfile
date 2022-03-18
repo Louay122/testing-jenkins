@@ -25,7 +25,7 @@ pipeline{
         stage('Push'){
 
             steps{
-                sh 'docker push louay112/my-app:1.0'
+                sh 'docker push louay112/testing-repo'
             }
 
         }
