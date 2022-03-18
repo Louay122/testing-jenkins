@@ -1,29 +1,38 @@
-node {
-    def app
+pipeline{
+    agent any
 
-    stage('Clone repository'){
-
-        checkout scm
-    }
-
-    stage('Build image'){
-
-        app = docker.build("Louay112/my-app")
+    enviroment{
+        DOCKERHUB_CREDENTIALS=credentials('docker_hub')
 
     }
 
-    stage('Test image'){
+    stages{
+        
+        stage('Build'){
 
-        app.inside{
-            echo "Tests passed"
+            steps{
+                sh 'docker build -t louay112/my-app:1.0 .'
+            }
+
+        }
+
+        stage('Login'){
+            steps{
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+
+        }
+        stage('Push'){
+
+            steps{
+                sh 'docker push louay112/my-app:1.0'
+            }
+
         }
     }
-    stage('Push image'){
-
-        docker.withRegistry('https://registry.hub.docker.com','louay112'){
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+    post{
+        always{
+            sh 'docker logout'
         }
-        echo "Trying to push docker build to dockerHub"
     }
 }
