@@ -19,7 +19,7 @@ pipeline{
 
         stage('Login'){
             steps{
-                sh 'docker login http://localhost:8095'
+                sh 'docker login -u admin -p Sprayos112345+ http://localhost:8095'
             }
 
         }
