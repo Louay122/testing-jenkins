@@ -27,7 +27,7 @@ pipeline{
 
             steps{
                 
-                sh 'docker push http://localhost:8095/docker-private-repo/my-app'
+                sh 'docker push http://localhost:8095/repository/docker-private-repo/my-app'
             }
 
         }
