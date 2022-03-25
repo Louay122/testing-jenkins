@@ -20,14 +20,13 @@ pipeline{
         stage('Login'){
             steps{
                 sh 'echo $NEXUS_CREDENTIALS_PSW | docker login -u $NEXUS_CREDENTIALS_USR --password-stdin http://localhost:8095/repository/docker-private-repo/'
-                //sh 'docker login -u admin -p Sprayos112345+ http://localhost:8095/repository/docker-private-repo/'
             }
 
         }
         stage('Push'){
 
             steps{
-                sh 'docker tag my-app http://localhost:8095/my-app'
+                sh 'docker tag my-app:latest http://localhost:8095/my-app:latest'
                 sh 'docker push http://localhost:8095/repository/docker-private-repo/my-app'
             }
 
