@@ -3,7 +3,8 @@ pipeline{
 
     environment{
         DOCKERHUB_CREDENTIALS=credentials('docker_hub')
-
+        registryCredentials = "nexus"
+        registry = "http://localhost:8081/repository/docker-private-repo/"
     }
 
     stages{
@@ -16,19 +17,16 @@ pipeline{
 
         }
 
-        stage('Login'){
-            steps{
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            }
-
+        stage('Uploading to Nexus') {
+            steps{  
+                script {
+                    docker.withRegistry( registry, registryCredentials ) {
+                    dockerImage.push('louay112/my-app:1.0')
+                     }
+                 }
+             }
         }
-        stage('Push'){
-
-            steps{
-                sh 'docker push louay112/my-app:1.0'
-            }
-
-        }
+        
     }
     post{
         always{
