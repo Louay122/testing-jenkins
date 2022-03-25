@@ -19,7 +19,8 @@ pipeline{
 
         stage('Login'){
             steps{
-                sh 'docker login -u admin -p Sprayos112345+ http://localhost:8095/repository/docker-private-repo/'
+                sh 'echo $NEXUS_CREDENTIALS_PSW | docker login -u $NEXUS_CREDENTIALS_USR --password-stdin http://localhost:8095/repository/docker-private-repo/'
+                //sh 'docker login -u admin -p Sprayos112345+ http://localhost:8095/repository/docker-private-repo/'
             }
 
         }
