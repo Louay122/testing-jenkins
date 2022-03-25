@@ -19,7 +19,7 @@ pipeline{
 
         stage('Login'){
             steps{
-                sh 'echo $NEXUS_CREDENTIALS_PSW | docker login -u $NEXUS_CREDENTIALS_USR --password-stdin'
+                sh 'docker login http://localhost:8081/:8095'
             }
 
         }
