@@ -12,7 +12,7 @@ pipeline{
         stage('Build'){
 
             steps{
-                sh 'docker build -t my-app:1.0 .'
+                sh 'docker build -t my-app .'
             }
 
         }
@@ -26,8 +26,8 @@ pipeline{
         stage('Push'){
 
             steps{
-                sh 'docker tag my-app:1.0 http://localhost:8095/docker-private-repo/my-app:1.0'
-                sh 'docker push http://localhost:8095/docker-private-repo/my-app:1.0'
+                sh 'docker tag my-app http://localhost:8095/docker-private-repo/my-app'
+                sh 'docker push http://localhost:8095/docker-private-repo/my-app'
             }
 
         }
