@@ -19,15 +19,15 @@ pipeline{
 
         stage('Login'){
             steps{
-                sh 'echo $NEXUS_CREDENTIALS_PSW | docker login -u $NEXUS_CREDENTIALS_USR --password-stdin https://a200-197-15-103-222.ngrok.io/repository/docker-private-repo/'
+                sh 'echo $NEXUS_CREDENTIALS_PSW | docker login -u $NEXUS_CREDENTIALS_USR --password-stdin https://a200-197-15-103-222.ngrok.io:8095/repository/docker-private-repo/'
             }
 
         }
         stage('Push'){
 
             steps{
-                sh 'docker tag my-app:latest https://a200-197-15-103-222.ngrok.io/docker-private-repo/my-app:latest'
-                sh 'docker push https://a200-197-15-103-222.ngrok.io/docker-private-repo/my-app:latest'
+                sh 'docker tag my-app:latest https://a200-197-15-103-222.ngrok.io:8095/docker-private-repo/my-app:latest'
+                sh 'docker push https://a200-197-15-103-222.ngrok.io:8095/docker-private-repo/my-app:latest'
             }
 
         }
