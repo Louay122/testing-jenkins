@@ -27,7 +27,7 @@ pipeline{
         stage('Push'){
 
             steps{
-                sh 'docker tag my-app http://localhost:8095/docker-private-repo/my-app'
+                sh 'docker tag my-app http://localhost:8095/my-app'
                 sh 'docker push http://localhost:8095/repository/docker-private-repo/my-app'
             }
 
