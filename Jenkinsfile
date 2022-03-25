@@ -19,15 +19,15 @@ pipeline{
 
         stage('Login'){
             steps{
-                sh 'docker login -u admin -p Sprayos112345+ http://localhost:8095'
+                sh 'docker login -u admin -p Sprayos112345+ http://localhost:8095/repository/docker-private-repo/'
             }
 
         }
         stage('Push'){
 
             steps{
-                sh 'docker tag my-app:1.0 http://localhost:8095/my-app:1.0'
-                sh 'docker push http://localhost:8095/my-app:1.0'
+                sh 'docker tag my-app:1.0 http://localhost:8095/docker-private-repo/my-app:1.0'
+                sh 'docker push http://localhost:8095/docker-private-repo/my-app:1.0'
             }
 
         }
