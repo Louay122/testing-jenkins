@@ -34,15 +34,15 @@ pipeline{
                 script {
                     docker.withRegistry( registry, NEXUS_CREDENTIALS ) {
                     dockerImage.push('latest')
+                    }
                 }
-            }
 
+            }
         }
     }
     post{
         always{
             sh 'docker logout'
         }
-    }
     }
 }
