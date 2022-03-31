@@ -13,5 +13,10 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongodb": "^3.3.3"
+  },
+  {
+  "scripts": {
+        "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner.bat"
+      }
   }
 }
